@@ -1,0 +1,47 @@
+form.login-form {
+    border: 3px solid #f1f1f1;
+    margin: 20px auto;
+    max-width: 400px;
+}
+
+.container {
+    padding: 16px;
+}
+
+.img-container {
+    text-align: center;
+    margin: 24px 0px 12px 0px;
+}
+
+img.avatar {
+    width: 40%;
+    border-radius: 50%;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+span.forget-password { 
+    float: right;
+    padding-top: 0px;
+}
