@@ -2,9 +2,14 @@
 
 # dependencies
 /backend/node_modules
+/backend/.vercel
+
+/backend-live/node_modules
+/backend-live/.vercel
+
 /frontend/node_modules
-/frontend/build
-/frontend/.env
+
+/frontend-live/node_modules
 /.pnp
 .pnp.js
 
