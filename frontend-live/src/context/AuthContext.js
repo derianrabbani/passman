@@ -10,7 +10,9 @@ function AuthContextProvider(props) {
 
     async function getLoggedIn() {
 
-        const loggedInRes = await Axios.post("https://passman-backend.vercel.app/users/checkToken")
+        const token = Cookies.get("loginToken") || ""
+
+        const loggedInRes = await Axios.post("https://passman-backend.vercel.app/users/checkToken", null, { headers: { "loginToken": token } })
 
         setLoggedIn(loggedInRes.data)
     }

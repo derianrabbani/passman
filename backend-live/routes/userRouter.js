@@ -69,7 +69,8 @@ router.post("/login", async (req, res) => {
 router.post("/checkToken", async (req, res) => {
 
     try {
-        const token = req.cookies.loginToken
+        // const token = req.cookies.loginToken
+        const token = req.header("loginToken")
 
         if (!token) return res.json(false)
 
