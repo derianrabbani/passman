@@ -11,7 +11,7 @@ app.use(cookieParser());
 app.use(cors({
     origin: [
         "http://localhost:3000",
-        "https://passman.vercel.app/"
+        "https://passman.vercel.app",
     ],
     credentials: true
 }))

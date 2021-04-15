@@ -59,7 +59,7 @@ router.post("/login", async (req, res) => {
 
         const token = await jwt.sign({ id: user._id }, process.env.JWT_SECRET_TOKEN)
 
-        res.cookie("loginToken", token).send()
+        res.json(token)
     }
     catch (err) {
         return res.status(500).json({ msg: err.message });
@@ -69,7 +69,6 @@ router.post("/login", async (req, res) => {
 router.post("/checkToken", async (req, res) => {
 
     try {
-
         const token = req.cookies.loginToken
 
         if (!token) return res.json(false)

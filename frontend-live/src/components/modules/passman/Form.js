@@ -109,7 +109,7 @@ export default function Form() {
                     <label htmlFor="email">
                         <strong>PIN</strong>
                     </label>
-                    <input type="password" placeholder="PIN" defaultValue={pin} onChange={(e) => setPin(e.target.value)} required />
+                    <input type="password" placeholder="PIN" defaultValue={pin} onChange={(e) => setPin(e.target.value)} />
 
                     <hr />
 

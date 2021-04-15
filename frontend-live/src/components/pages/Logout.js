@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { useHistory } from "react-router-dom";
 import Axios from "axios";
 import AuthContext from "../../context/AuthContext";
+import Cookies from "js-cookie";
 
 export default function Logout() {
 
@@ -12,7 +13,9 @@ export default function Logout() {
 
         e.preventDefault()
 
-        await Axios.get("https://passman-backend.vercel.app/users/logout")
+        // await Axios.get("https://passman-backend.vercel.app/users/logout")
+
+        Cookies.remove("loginToken")
         await getLoggedIn()
 
         history.push("/")

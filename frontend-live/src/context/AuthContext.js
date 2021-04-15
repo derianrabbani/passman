@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 import Axios from "axios";
+import Cookies from "js-cookie";
 
 const AuthContext = createContext()
 
@@ -10,7 +11,6 @@ function AuthContextProvider(props) {
     async function getLoggedIn() {
 
         const loggedInRes = await Axios.post("https://passman-backend.vercel.app/users/checkToken")
-
 
         setLoggedIn(loggedInRes.data)
     }
