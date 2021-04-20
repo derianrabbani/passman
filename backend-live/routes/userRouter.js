@@ -59,7 +59,8 @@ router.post("/login", async (req, res) => {
 
         const token = await jwt.sign({ id: user._id }, process.env.JWT_SECRET_TOKEN)
 
-        res.json(token)
+        // res.cookie("loginToken", token).send()
+        return res.json(token)
     }
     catch (err) {
         return res.status(500).json({ msg: err.message });
@@ -69,6 +70,7 @@ router.post("/login", async (req, res) => {
 router.post("/checkToken", async (req, res) => {
 
     try {
+
         // const token = req.cookies.loginToken
         const token = req.header("loginToken")
 

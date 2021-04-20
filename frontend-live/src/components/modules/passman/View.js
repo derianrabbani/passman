@@ -4,6 +4,7 @@ import Header from "../../pages/Header"
 import Axios from "axios";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEdit, faTrash, faEye } from '@fortawesome/free-solid-svg-icons'
+import Cookies from "js-cookie";
 
 export default function Index() {
 
@@ -19,9 +20,9 @@ export default function Index() {
 
     const getData = async () => {
 
-        const token = localStorage.getItem("auth-token") || ""
+        const token = Cookies.get("loginToken") || ""
 
-        const view = await Axios.get("https://passman-backend.vercel.app/passman/", { headers: { "auth-token": token } })
+        const view = await Axios.get("https://passman-backend.vercel.app/passman/", { headers: { "loginToken": token } })
 
         setDataTable(view.data.map((val, i) => (
             <tr key={i}>
@@ -47,12 +48,14 @@ export default function Index() {
 
     const deleted = async (id) => {
 
+        const token = Cookies.get("loginToken") || ""
+
         try {
             if (window.confirm("Are you sure delete this document ?")) {
 
                 const token = localStorage.getItem("auth-token") || ""
 
-                const deleted = await Axios.delete("https://passman-backend.vercel.app/passman/delete/" + id, { headers: { "auth-token": token } })
+                const deleted = await Axios.delete("https://passman-backend.vercel.app/passman/delete/" + id, { headers: { "loginToken": token } })
 
                 getData()
 
@@ -66,9 +69,10 @@ export default function Index() {
     }
 
     const showEncryption = async (id) => {
+        const token = Cookies.get("loginToken") || ""
         try {
 
-            const showPassword = await Axios.get("https://passman-backend.vercel.app/passman/" + id)
+            const showPassword = await Axios.get("https://passman-backend.vercel.app/passman/" + id, { headers: { "loginToken": token } })
 
             alert("Password : " + showPassword.data.password + "\n Pin : " + showPassword.data.pin)
         }

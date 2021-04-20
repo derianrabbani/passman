@@ -24,7 +24,9 @@ export default function Login() {
         try {
             const user = { email, password }
 
-            const token = await axios.post("https://passman-backend.vercel.app/users/login", user);
+            // const token = await axios.post("https://passman-backend.vercel.app/users/login", user);
+
+            const token = await axios.post("https://passman-backend.vercel.app/users/login", user)
             Cookies.set("loginToken", token.data)
             await getLoggedIn()
 

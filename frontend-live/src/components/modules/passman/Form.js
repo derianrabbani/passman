@@ -3,6 +3,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import Header from "../../pages/Header"
 import { useHistory, useParams } from "react-router-dom";
 import ErrorNotice from "../../pages/ErrorNotice";
+import Cookies from "js-cookie";
 
 export default function Form() {
 
@@ -21,10 +22,11 @@ export default function Form() {
 
 
         const loadData = async () => {
+            const token = Cookies.get("loginToken") || ""
 
             if (idPassman) {
 
-                const passman = await axios.get("https://passman-backend.vercel.app/passman/" + idPassman)
+                const passman = await axios.get("https://passman-backend.vercel.app/passman/" + idPassman, { headers: { "loginToken": token } })
 
                 if (passman) {
 
@@ -45,6 +47,7 @@ export default function Form() {
 
         e.preventDefault()
 
+        const token = Cookies.get("loginToken") || ""
         try {
 
             if (id) {
@@ -55,7 +58,7 @@ export default function Form() {
                     password,
                     pin
                 }
-                const saved = await axios.post("https://passman-backend.vercel.app/passman/update", passman)
+                const saved = await axios.post("https://passman-backend.vercel.app/passman/update", passman, { headers: { "loginToken": token } })
 
                 history.push("/passman")
             }
@@ -66,7 +69,7 @@ export default function Form() {
                     password,
                     pin
                 }
-                const saved = await axios.post("https://passman-backend.vercel.app/passman/create", passman)
+                const saved = await axios.post("https://passman-backend.vercel.app/passman/create", passman, { headers: { "loginToken": token } })
 
                 history.push("/passman")
             }
@@ -109,7 +112,7 @@ export default function Form() {
                     <label htmlFor="email">
                         <strong>PIN</strong>
                     </label>
-                    <input type="password" placeholder="PIN" defaultValue={pin} onChange={(e) => setPin(e.target.value)} />
+                    <input type="password" placeholder="PIN" defaultValue={pin} onChange={(e) => setPin(e.target.value)} required />
 
                     <hr />
 
