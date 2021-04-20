@@ -22,7 +22,7 @@ export default function Index() {
 
         const token = Cookies.get("loginToken") || ""
 
-        const view = await Axios.get("https://passman-backend.vercel.app/passman/", { headers: { "loginToken": token } })
+        const view = await Axios.get("https://passman-backend.vercel.app/passman/", null, { headers: { "loginToken": token } })
 
         setDataTable(view.data.map((val, i) => (
             <tr key={i}>
