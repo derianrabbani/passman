@@ -53,8 +53,6 @@ export default function Index() {
         try {
             if (window.confirm("Are you sure delete this document ?")) {
 
-                const token = localStorage.getItem("auth-token") || ""
-
                 const deleted = await Axios.delete("https://passman-backend.vercel.app/passman/delete/" + id, { headers: { "loginToken": token } })
 
                 getData()
