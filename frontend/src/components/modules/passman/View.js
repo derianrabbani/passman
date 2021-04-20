@@ -55,7 +55,7 @@ export default function Index() {
 
                 const token = localStorage.getItem("auth-token") || ""
 
-                const deleted = await Axios.delete("http://localhost:5000/passman/delete/" + id, { headers: { "loginToken": token } })
+                const deleted = await Axios.delete("http://localhost:5000/passman/delete/" + id, null, { headers: { "loginToken": token } })
 
                 getData()
 

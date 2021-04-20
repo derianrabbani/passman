@@ -22,7 +22,7 @@ export default function Index() {
 
         const token = Cookies.get("loginToken") || ""
 
-        const view = await Axios.get("https://passman-backend.vercel.app/passman/", null, { headers: { "loginToken": token } })
+        const view = await Axios.get("https://passman-backend.vercel.app/passman/", { headers: { "loginToken": token } })
 
         setDataTable(view.data.map((val, i) => (
             <tr key={i}>
@@ -55,7 +55,7 @@ export default function Index() {
 
                 const token = localStorage.getItem("auth-token") || ""
 
-                const deleted = await Axios.delete("https://passman-backend.vercel.app/passman/delete/" + id, { headers: { "loginToken": token } })
+                const deleted = await Axios.delete("https://passman-backend.vercel.app/passman/delete/" + id, null, { headers: { "loginToken": token } })
 
                 getData()
 
