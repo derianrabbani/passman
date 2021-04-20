@@ -53,9 +53,7 @@ export default function Index() {
         try {
             if (window.confirm("Are you sure delete this document ?")) {
 
-                const token = localStorage.getItem("auth-token") || ""
-
-                const deleted = await Axios.delete("http://localhost:5000/passman/delete/" + id, null, { headers: { "loginToken": token } })
+                const deleted = await Axios.delete("http://localhost:5000/passman/delete/" + id, { headers: { "loginToken": token } })
 
                 getData()
 
