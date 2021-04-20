@@ -5,6 +5,7 @@ import axios from "axios";
 import logo from '../../assets/images/img_avatar2.png';
 import ErrorNotice from "../pages/ErrorNotice";
 import Header from "./Header"
+import Cookies from "js-cookie";
 
 export default function Login() {
 
@@ -23,7 +24,10 @@ export default function Login() {
         try {
             const user = { email, password }
 
-            await axios.post("http://localhost:5000/users/login", user)
+            // const token = await axios.post("https://passman-backend.vercel.app/users/login", user);
+
+            const token = await axios.post("http://localhost:5000/users/login", user)
+            Cookies.set("loginToken", token.data)
             await getLoggedIn()
 
             history.push("/")

@@ -3,6 +3,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import Header from "../../pages/Header"
 import { useHistory, useParams } from "react-router-dom";
 import ErrorNotice from "../../pages/ErrorNotice";
+import Cookies from "js-cookie";
 
 export default function Form() {
 
@@ -21,10 +22,11 @@ export default function Form() {
 
 
         const loadData = async () => {
+            const token = Cookies.get("loginToken") || ""
 
             if (idPassman) {
 
-                const passman = await axios.get("http://localhost:5000/passman/" + idPassman)
+                const passman = await axios.get("http://localhost:5000/passman/" + idPassman, { headers: { "loginToken": token } })
 
                 if (passman) {
 
@@ -45,6 +47,7 @@ export default function Form() {
 
         e.preventDefault()
 
+        const token = Cookies.get("loginToken") || ""
         try {
 
             if (id) {
@@ -55,7 +58,7 @@ export default function Form() {
                     password,
                     pin
                 }
-                const saved = await axios.post("http://localhost:5000/passman/update", passman)
+                const saved = await axios.post("http://localhost:5000/passman/update", passman, { headers: { "loginToken": token } })
 
                 history.push("/passman")
             }
@@ -66,7 +69,7 @@ export default function Form() {
                     password,
                     pin
                 }
-                const saved = await axios.post("http://localhost:5000/passman/create", passman)
+                const saved = await axios.post("http://localhost:5000/passman/create", passman, { headers: { "loginToken": token } })
 
                 history.push("/passman")
             }

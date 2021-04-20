@@ -1,13 +1,15 @@
 import axios from "axios";
-import React, { Fragment, useContext, useState } from "react";
+import React, { Fragment, useContext, useState, useEffect } from "react";
 // import UserContext from "../../context/UserContext";
 import AuthContext from "../../context/AuthContext";
 import { useHistory, Link } from "react-router-dom";
 import ErrorNotice from "../pages/ErrorNotice";
 import Header from "./Header"
+import Cookies from "js-cookie";
 
 export default function Registration() {
 
+    // console.log("hahaha")
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [passwordCheck, setPasswordCheck] = useState()
@@ -25,12 +27,19 @@ export default function Registration() {
 
         try {
 
+            // Register
             const user = { email, password, passwordCheck, displayName }
             const userRes = await axios.post("http://localhost:5000/users/registration", user);
 
+            // Login
             const login = { email, password }
-            await axios.post("http://localhost:5000/users/login", login);
+            const token = await axios.post("http://localhost:5000/users/login", login);
+            Cookies.set("loginToken", token.data)
+
+            // Kirim Email
             await axios.get("http://localhost:5000/users/email/" + email)
+
+            // Set Context dan Redirect
             await getLoggedIn()
             history.push("/")
         }
@@ -38,6 +47,13 @@ export default function Registration() {
             err.response.data.msg && setError(err.response.data.msg)
         }
     }
+
+    // useEffec
+    useEffect(() => {
+
+        // Cookies.set("test", "ahahaha")
+        // Cookies.remove("test")
+    }, [])
 
     return (
         <Fragment>
